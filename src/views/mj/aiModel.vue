@@ -6,21 +6,22 @@ import {gptConfigStore} from '@/store'
 const emit = defineEmits(['close']);
 const config = ref({
 model:[ 
-			'gpt-4',
+			'gpt-3.5-turbo',
 			'gpt-3.5-turbo-1106',
 			'gpt-4-1106-preview',
+			'gpt-4',
 			'gpt-4-32k',
 			'gpt-4-vision-preview',
 			'gpt-4-all',
 			'dall-e-3',
-			'gemini-pro',
-			'gemini-pro-vision',
-			'google-palm',
 			'midjourney',
+			'stable-diffusion',	
 			'net-gpt-3.5-turbo',
 			'net-gpt-3.5-turbo-16k',
 			'net-gpt-4',
-			'stable-diffusion'
+			'gemini-pro',
+			'gemini-pro-vision',
+			'google-palm'
 			],
 			maxToken:4096
 }); 
