@@ -70,7 +70,7 @@ const  isShow = computed(()=>{
         <a class="text-red-500" href="https://github.com/Dooy/chatgpt-web-midjourney-proxy" target="_blank" v-if=" isShow  "> (发现更新版本 {{ st.lastVersion }})</a>
         <a class="text-gray-500" href="https://github.com/Dooy/chatgpt-web-midjourney-proxy" target="_blank" v-else-if="st.lastVersion"> (已是最新版本)</a>
       </h2>
-      <div class="p-2 space-y-2 rounded-md bg-neutral-100 dark:bg-neutral-700">
+<!-- <div class="p-2 space-y-2 rounded-md bg-neutral-100 dark:bg-neutral-700">
         <p>
           此项目开源于
           <a
@@ -96,6 +96,6 @@ const  isShow = computed(()=>{
       <p>{{ $t("setting.timeout") }}：{{ config?.timeoutMs ?? '-' }}</p>
       <p>{{ $t("setting.socks") }}：{{ config?.socksProxy ?? '-' }}</p>
       <p>{{ $t("setting.httpsProxy") }}：{{ config?.httpsProxy ?? '-' }}</p>
-    </div>
+    </div> -->
   </NSpin>
 </template>
