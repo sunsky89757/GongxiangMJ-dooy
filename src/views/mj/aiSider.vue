@@ -78,7 +78,7 @@ const goHome =computed(  () => {
                 </n-tooltip>
             </a>
 
-<!-- 新增上传 -->
+							<!-- 新增上传 -->
 							<a href="https://up.gptacg.com/upload.php" target="_blank" class="router-link-exact-active h-12 w-12 cursor-pointer rounded-xl bg-white duration-300 dark:bg-[#34373c] hover:bg-[#bbb] dark:hover:bg-[#555]">
 						    <n-tooltip placement="right" trigger="hover">
 						        <template #trigger> 
@@ -87,7 +87,7 @@ const goHome =computed(  () => {
 						                <span class="text-[10px]">上传</span>
 						            </div> 
 						        </template>
-						        上传文件
+						        上传
 						    </n-tooltip>
 						</a>
 
