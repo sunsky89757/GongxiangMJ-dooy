@@ -20,9 +20,9 @@ export function upImg(file:any   ):Promise<any>
         //const file = input.target.files[0];
         const filename = file.name;
         //console.log('selectFile', file )
-        if(file.size>(1024*1024)){
-            //msgRef.value.showError('图片大小不能超过1M');
-            r('图片大小不能超过1M')
+        if(file.size>(3072*3072)){
+            //msgRef.value.showError('图片大小不能超过3M');
+            r('图片大小不能超过3M')
             return ;
         }
         if (! (filename.endsWith('.jpg') ||
