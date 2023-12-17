@@ -83,7 +83,7 @@ const goHome =computed(  () => {
 						    <n-tooltip placement="right" trigger="hover">
 						        <template #trigger> 
 						            <div class="flex h-full justify-center items-center py-1 flex-col">
-						                <SvgIcon icon="ri:apps-fill" class="text-3xl flex-1"></SvgIcon>
+						                <SvgIcon icon="ri:upload-cloud-2-line" class="text-3xl flex-1"></SvgIcon>
 						                <span class="text-[10px]">上传</span>
 						            </div> 
 						        </template>
