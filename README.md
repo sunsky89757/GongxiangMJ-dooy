@@ -30,6 +30,7 @@
 - ✅ chatgpt 支持逆向模型 gpt-4-all gpt-4-v gpt-4-gizmo-(gizmo_id)
 - ✅ chatgpt 支持超链模型切换 https://git.ddaiai.com/#/m/gpt-4-all https://git.ddaiai.com/#/m/gpt-4-gizmo-g-2fkFE8rbu
 - ✅ chatgpt 支持 GPTs 多模态
+- ✅ chatgpt 支持 tts whisper
 
 ## 待开发
 - ⏰ 支持 GPTs 多模态
@@ -52,6 +53,8 @@
 | API_UPLOADER |  支持上传 | 关闭  | ✅ |  x|
 | HIDE_SERVER |  前端ui隐藏服务端|    | ✅ |  x|
 | CUSTOM_MODELS |  自定义可选模型 | 无  | ✅ |  ✅|
+| TJ_BAIDU_ID |  百度统计ID | 无  | ✅ |  ✅|
+| TJ_GOOGLE_ID |  谷歌统计ID | 无  | ✅ |  ✅|
 
 ## docker 部署
 **假设**:
@@ -108,7 +111,8 @@ docker run -d --name mj6013  -p 6013:8080  \
 ![多模态](./docs/gpts.jpg)
 ![多模态](./docs/gpts1.jpg)
 
-
+### tts 和 whisper
+![whisper--tts](./docs/tts.jpg)
 
 ### 局部重绘：
 [![局部重绘](./docs/mj2.jpg)](./docs/mj2.jpg)

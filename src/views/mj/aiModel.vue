@@ -22,7 +22,8 @@ model:[
 			'net-gpt-4',
 			'gemini-pro',
 			'gemini-pro-vision',
-			'google-palm'
+			'google-palm',
+			'tts-1'
 			],
 			maxToken:4096
 }); 

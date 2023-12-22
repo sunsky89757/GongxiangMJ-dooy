@@ -12,7 +12,10 @@ import fs from "fs"
 //import {createProxyMiddleware} from "http-proxy-middleware"
 import  proxy from "express-http-proxy"
 import bodyParser  from 'body-parser';
+import FormData  from 'form-data'
+import axios from 'axios';
 
+ 
 
 const app = express()
 const router = express.Router()
@@ -75,7 +78,9 @@ router.post('/session', async (req, res) => {
     const amodel=   process.env.OPENAI_API_MODEL?? "gpt-3.5-turbo" ; 
     const isApiGallery=  isNotEmptyString(  process.env.MJ_API_GALLERY );  
     const cmodels =   process.env.CUSTOM_MODELS??'' ;  
-    res.send({ status: 'Success', message: '', data: {isHideServer,isUpload, auth: hasAuth, model: currentModel(),amodel,isApiGallery,cmodels } })
+    const baiduId=process.env.TJ_BAIDU_ID?? "" ; 
+    const googleId=process.env.TJ_GOOGLE_ID?? "" ; 
+    res.send({ status: 'Success', message: '', data: {baiduId, googleId,isHideServer,isUpload, auth: hasAuth, model: currentModel(),amodel,isApiGallery,cmodels } })
   }
   catch (error) {
     res.send({ status: 'Fail', message: error.message, data: null })
@@ -123,7 +128,7 @@ const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     let uploadFolderPath=`./uploads/${formattedDate()}/`;//`
 
-    console.log('dir', __dirname   ) ;
+    //console.log('dir', __dirname   ) ;
 
     if(!fs.existsSync('./uploads/')) {
       fs.mkdirSync('./uploads/');
@@ -157,6 +162,39 @@ if(isUpload){
 }
 app.use('/uploads', express.static('uploads'));
 
+const storage2 = multer.memoryStorage();
+const upload2 = multer({ storage: storage2 });
+
+app.use(
+  '/openapi/v1/audio/transcriptions', 
+  upload2.single('file'),
+  async (req, res, next) => { 
+    //console.log( "boday",req.body ,  req.body.model );
+    if(req.file.buffer) { 
+      const fileBuffer = req.file.buffer; 
+      const formData = new FormData();
+      formData.append('file',  fileBuffer,  { filename:  req.file.originalname }  );
+      formData.append('model',  req.body.model ); 
+     try{
+       let url = `${API_BASE_URL}/v1/audio/transcriptions` ; 
+      let responseBody = await axios.post( url , formData, {
+              headers: {  
+              Authorization: 'Bearer '+ process.env.OPENAI_API_KEY ,
+              'Content-Type': 'multipart/form-data'  
+            } 
+        })   ;
+        // console.log('responseBody', responseBody.data  );
+       res.json(responseBody.data );
+      }catch(e){
+        //console.log('goog',e );
+        res.status( 400 ).json( {error: e } );
+      }
+
+    }else{
+      res.status(400).json({'error':'uploader fail'});
+    } 
+  }
+);
 
 //代理openai 接口
 app.use('/openapi', proxy(API_BASE_URL, {
