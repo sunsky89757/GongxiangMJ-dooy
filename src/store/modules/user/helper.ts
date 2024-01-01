@@ -1,5 +1,5 @@
 import { ss } from '@/utils/storage'
-
+import { t } from '@/locales'
 const LOCAL_NAME = 'userStorage'
 
 export interface UserInfo {
