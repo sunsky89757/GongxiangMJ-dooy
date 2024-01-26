@@ -371,9 +371,11 @@ export const blurClean= ()=>{
   gptServerStore.myData.UPLOADER_URL=  myTrim( myTrim( gptServerStore.myData.UPLOADER_URL.trim(),'/'),'\\');
 }
 
-export const countTokens= async ( dataSources:Chat.Chat[], input:string )=>{
-    let rz={system:0,input:0 ,history:0,remain:330,modelTokens:'4k',planOuter: gptConfigStore.myData.max_tokens  }
-    const model = gptConfigStore.myData.model;
+export const countTokens= async ( dataSources:Chat.Chat[], input:string ,uuid:number )=>{
+    const chatSet= new chatSetting(uuid);
+    const myStore= chatSet.getGptConfig();
+    let rz={system:0,input:0 ,history:0,remain:330,modelTokens:'4k',planOuter:myStore.max_tokens  }
+    const model =myStore.model;
     const max= getModelMax(model );
     let unit= 1024;
     if(  model=='gpt-4-1106-preview' || model=='gpt-4-vision-preview' ) unit=1000;
@@ -402,7 +404,10 @@ const getModelMax=( model:string )=>{
         return 32;
     }else if( model.indexOf('64k')>-1  ){
         return 64;
-    }else if( model.indexOf('128k')>-1 || model=='gpt-4-1106-preview' || model=='gpt-4-vision-preview' ){
+    }else if( model.indexOf('128k')>-1 
+    || model=='gpt-4-1106-preview' 
+    || model=='gpt-4-0125-preview' 
+    || model=='gpt-4-vision-preview' ){
         return 128; 
     }else if( model.indexOf('gpt-4')>-1  ){  
         max=8;
