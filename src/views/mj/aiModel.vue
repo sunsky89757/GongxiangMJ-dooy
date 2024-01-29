@@ -38,6 +38,11 @@ model:[
 			maxToken:4096
 }); 
 const st= ref({openMore:false });
+const voiceList= computed(()=>{
+    let rz=[];
+    for(let o of "alloy,echo,fable,onyx,nova,shimmer".split(/[ ,]+/ig))rz.push({label:o,value:o}) 
+    return rz;
+});
 const modellist = computed(() => { //
     let rz =[ ];
     for(let o of config.value.model){
@@ -193,6 +198,10 @@ onMounted(() => {
     </section>
     <div class="mb-4 text-[12px] text-gray-300 dark:text-gray-300/20">{{ $t('mj.frequency_penaltyInfo') }}</div>
 
+    <section class="mb-4 flex justify-between items-center"  >
+        <div >{{ $t('mj.tts_voice') }}</div>
+        <n-select v-model:value="nGptStore.tts_voice" :options="voiceList" size="small"  class="!w-[50%]"   />
+    </section>
 
 
 </template>
