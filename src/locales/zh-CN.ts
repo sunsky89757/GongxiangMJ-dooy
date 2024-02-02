@@ -159,7 +159,7 @@ export default {
     ,prompt:'提示词'
     ,imgCYes:'含有垫图'
     ,imgCUpload:'自传垫图'
-    ,imgCInfo:'垫图说明：<br/> 1.垫图可使用自己的图片作为基础，让MJ来绘图<br/> 2.可以使用多张垫图 最多5张， 单张图片不超过1M<br/>'
+    ,imgCInfo:'垫图说明：<br/> 1.垫图可使用自己的图片作为基础，让MJ来绘图<br/> 2.可以使用多张垫图 最多5张， 单张图片不超过10M<br/>'
     ,imgCadd:'+添加'
     ,del:'删除'
     ,img2text:'图生文'
