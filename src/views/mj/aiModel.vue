@@ -25,7 +25,6 @@ model:[
 			'gpt-4-32k',
 			'gpt-4-vision-preview',
 			'gpt-4-all',
-			'dall-e-3',
 			'midjourney',
 			'stable-diffusion',	
 			'net-gpt-3.5-turbo',
