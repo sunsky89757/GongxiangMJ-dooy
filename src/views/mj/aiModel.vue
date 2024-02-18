@@ -25,14 +25,11 @@ model:[
 			'gpt-4-32k',
 			'gpt-4-vision-preview',
 			'gpt-4-all',
-			'midjourney',
-			'stable-diffusion',	
 			'net-gpt-3.5-turbo',
 			'net-gpt-3.5-turbo-16k',
 			'net-gpt-4',
 			'gemini-pro',
 			'gemini-pro-vision',
-			'google-palm',
 			'tts-1'
 			],
 			maxToken:4096
