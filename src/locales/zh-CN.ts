@@ -280,6 +280,6 @@ export default {
     ,typing:'正在输入'
 
     ,authErro:'授权失败'
-    ,authBt:'请重新授权'
+    ,authBt:'请重新输入授权访问密码'
   }
 }
