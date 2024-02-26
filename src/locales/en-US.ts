@@ -184,7 +184,13 @@ export default {
   "frequency_penalty": "Frequency",
   "frequency_penaltyInfo": "As the (frequency_penalty) value increases, there is a higher likelihood of reducing repeated words",
   "tts_voice": "Voice Role",
-  "typing": "Typing"
+  "typing": "Typing",
+  "authErro": "Authorization failed",
+  "authBt": "Please enter the authorization access password again" ,
+  "micWhisper": "Whisper speech recognition",
+  "micAsr": "Instant recognition",
+  "micRec": "Start recording, please speak! It will automatically stop if there is no sound for 2 seconds.",
+  "micRecEnd": "Recording has ended"
   },
   "mjset": {
     "server": "Server",

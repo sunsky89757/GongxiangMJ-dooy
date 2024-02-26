@@ -182,7 +182,13 @@ export default {
         "frequency_penalty": "Pénalité de fréquence",
         "frequency_penaltyInfo": "À mesure que la valeur de (frequency_penalty) augmente, il y a plus de chances de réduire les mots répétés"
         ,"tts_voice": "Personnage vocal TTS",
-        "typing": "En train d'écrire"
+        "typing": "En train d'écrire",
+        "authErro": "Échec de l'autorisation",
+        "authBt": "Veuillez saisir à nouveau le mot de passe d'accès à l'autorisation",
+        "micWhisper": "Reconnaissance vocale chuchotement",
+        "micAsr": "Reconnaissance instantanée",
+        "micRec": "Commencer l'enregistrement, s'il vous plaît parlez ! Il s'arrêtera automatiquement s'il n'y a pas de son pendant 2 secondes.",
+        "micRecEnd": "L'enregistrement est terminé"
 
     },    
     "mjset": {
