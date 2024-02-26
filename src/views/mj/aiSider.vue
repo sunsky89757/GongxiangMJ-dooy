@@ -89,7 +89,7 @@ const chatId= computed(()=>chatStore.active??'1002' );
             </a>
 
 							<!-- 新增上传 -->
-							<a href="https://up.gptacg.com/upload.php" target="_blank" class="router-link-exact-active h-12 w-12 cursor-pointer rounded-xl bg-white duration-300 dark:bg-[#34373c] hover:bg-[#bbb] dark:hover:bg-[#555]">
+							<a href="https://upload.gongxiangai.top/upload.php" target="_blank" class="router-link-exact-active h-12 w-12 cursor-pointer rounded-xl bg-white duration-300 dark:bg-[#34373c] hover:bg-[#bbb] dark:hover:bg-[#555]">
 						    <n-tooltip placement="right" trigger="hover">
 						        <template #trigger> 
 						            <div class="flex h-full justify-center items-center py-1 flex-col">
