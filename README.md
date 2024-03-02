@@ -67,6 +67,8 @@
 | AUTH_SECRET_ERROR_COUNT | 防爆破验证：验证次数触发 NGINX 请设置 `proxy_set_header   X-Forwarded-For  $remote_addr`  | 无  | ✅ |  x|
 | AUTH_SECRET_ERROR_TIME | 防爆破验证：停留时间 单位分钟  | 无  | ✅ |  x|
 | CLOSE_MD_PREVIEW | 是否不关闭输入预览 | 无  | ✅ |  ✅|
+| UPLOAD_TYPE | 指定上传方式 [`R2` R2上传] [`API` 跟随UI前端中转]、[`Container` 本地容器]、[`MyUrl` 自定义链接]  |  空 | ✅ |  x|
+
   
 
 ## docker 部署
@@ -195,9 +197,14 @@ MIT © [Dooy](./license)
 [![Star History Chart](https://api.star-history.com/svg?repos=Dooy/chatgpt-web-midjourney-proxy&type=Date)](https://star-history.com/#Dooy/chatgpt-web-midjourney-proxy&Date)
 
 ## 捐助
-如果我的开源项目对你有帮助，请考虑通过以下任意一种方式赞助:
-
-### 微信赞助
-![微信](./docs/wxpay.jpg)
-### 支付宝赞助
-![支付宝](./docs/alipay.jpg)
+如果我的开源项目对你有帮助，请考虑通过以下任意一种方式赞助: 
+<div style="display: flex; flex-wrap: wrap">
+    <div style="width:200px">
+        <img src="./docs/wxpay.jpg"  style="width:200px">
+        <div>微信捐助</div>
+    </div>
+    <div style="width:200px">
+        <img src="./docs/alipay.jpg"  style="width:200px"> 
+        <div>支付宝捐助</div>
+    </div>
+</div>
