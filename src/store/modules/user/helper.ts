@@ -15,7 +15,7 @@ export interface UserState {
 export function defaultSetting(): UserState {
   return {
     userInfo: {
-      avatar: 'https://www.gptacg.com/wp-content/uploads/2023/12/avatar.jpg',
+      avatar: 'https://pic.imgdb.cn/item/65e9ca859f345e8d03bf26c2.jpg',
       name: 'MJ绘图 & GPTs',
       description: '',
     },
