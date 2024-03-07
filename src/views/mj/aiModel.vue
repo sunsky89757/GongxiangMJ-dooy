@@ -28,6 +28,8 @@ model:[
 			'net-gpt-3.5-turbo',
 			'net-gpt-3.5-turbo-16k',
 			'net-gpt-4',
+            'claude-3-opus-20240229',
+            'claude-3-sonnet-20240229',
 			'gemini-pro',
 			'gemini-pro-vision',
 			'tts-1'
