@@ -100,6 +100,8 @@ watch(()=>nGptStore.value.model,(n)=>{
         max=4096;
     }else if( n.indexOf('gpt-4')>-1 ||  n.indexOf('16k')>-1 ){ //['16k','8k','32k','gpt-4'].indexOf(n)>-1
         max=4096*2;
+    }else if( n.toLowerCase().includes('claude-3') ){
+         max=4096*2;
     }
     config.value.maxToken=max/2;
     if(nGptStore.value.max_tokens> config.value.maxToken ) nGptStore.value.max_tokens= config.value.maxToken;
@@ -210,7 +212,8 @@ onMounted(() => {
 
  <section class=" text-right flex justify-end space-x-2"  >
     <NButton   @click="reSet()">{{ $t('mj.setBtBack') }}</NButton>
-    <NButton type="primary" @click="saveChat">{{ $t('mj.setBtSaveChat') }}</NButton>
-    <NButton type="primary" @click="save">{{ $t('mj.setBtSaveSys') }}</NButton>
+    <!-- <NButton type="primary" @click="saveChat">{{ $t('mj.setBtSaveChat') }}</NButton>
+    <NButton type="primary" @click="save">{{ $t('mj.setBtSaveSys') }}</NButton> -->
+    <NButton type="primary" @click="saveChat">{{ $t('common.save') }}</NButton>
  </section>
 </template>
