@@ -9,6 +9,8 @@ export const homeStore = reactive({
         ,local:'' //当前所处的版本
         ,session:{} as any
         ,isLoader:false
+        ,vtoken:'' //turnstile token
+        ,ctoken:'' //cookie
        
     }
     

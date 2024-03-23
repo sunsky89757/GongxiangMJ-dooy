@@ -8,7 +8,6 @@ import { isNumber, isObject } from "@/utils/is";
 import { t } from "@/locales";
 import { ChatMessage } from "gpt-tokenizer/esm/GptEncoding";
 import { chatSetting } from "./chat";
-
 //import {encode,  encodeChat}  from "gpt-tokenizer"
 //import {encode,  encodeChat} from "gpt-tokenizer/cjs/encoding/cl100k_base.js";
 //import { get_encoding } from '@dqbd/tiktoken'
@@ -55,6 +54,24 @@ export const gptFetch=(url:string,data?:any,opt2?:any )=>{
         .catch(e=>reject(e))
     })
 
+}
+
+export const regCookie= async (n:string )=>{
+    if( n=='' ) return ;
+    //mlog('regCookie:', n)
+    let headers= {'Content-Type':'application/json', 'x-vtoken':n  }
+    //headers={...headers,...getHeaderAuthorization()}
+    let opt:RequestInit ={method:'GET'};
+    opt.headers= headers ;
+    const ck= await  new Promise<any>((resolve, reject) => {
+    fetch('/api/reg', opt )
+        .then(d=>d.json().then(d=> resolve(d))
+        .catch(e=>reject(e)))
+        .catch(e=>reject(e))
+     });
+    homeStore.setMyData({ctoken:ck.ctoken })
+     
+    mlog('regCookie:',   ck,n  )
 }
  // 前端直传 cloudflare r2
 function uploadR2(file: File) {
@@ -123,6 +140,10 @@ export const GptUploader =   ( _url :string, FormData:FormData )=>{
                 headers= {...headers, ...header2}
             }
         }
+        if( homeStore.myData.vtoken ){
+            const  vtokenh={ 'x-vtoken':  homeStore.myData.vtoken };
+             headers= {...headers, ...vtokenh}
+        }
         return  uploadNomalDo(url,headers );
         
     }
@@ -130,6 +151,7 @@ export const GptUploader =   ( _url :string, FormData:FormData )=>{
     //处理上传流程 
     const uploadType=   ( (homeStore.myData.session.uploadType??'') as string).toLocaleLowerCase() ;
     let headers=   {'Content-Type': 'multipart/form-data' }
+    
     //R2
     if(uploadType=='r2' ){
         return upLoaderR2(); 
@@ -206,14 +228,25 @@ interface subModelType{
     uuid?:string|number
 }
 function getHeaderAuthorization(){
+    let headers={}
+    if( homeStore.myData.vtoken ){
+        const  vtokenh={ 'x-vtoken':  homeStore.myData.vtoken ,'x-ctoken':  homeStore.myData.ctoken};
+        headers= {...headers, ...vtokenh}
+    }
     if(!gptServerStore.myData.OPENAI_API_KEY){
         const authStore = useAuthStore()
-        if( authStore.token ) return { 'x-ptoken':  authStore.token };
-        return {}
+        if( authStore.token ) {
+            const bmi= { 'x-ptoken':  authStore.token };
+            headers= {...headers, ...bmi }
+            return headers;
+        }
+        return headers
     }
-    return {
+    const bmi={
         'Authorization': 'Bearer ' +gptServerStore.myData.OPENAI_API_KEY
     }
+    headers= {...headers, ...bmi }
+    return headers
 }
 
 export const getSystemMessage = (uuid?:number )=>{

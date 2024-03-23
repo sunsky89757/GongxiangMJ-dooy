@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { ref ,computed,watch } from 'vue';
+import { ref ,computed,watch, onMounted } from 'vue';
 import { useBasicLayout } from '@/hooks/useBasicLayout'
 import { t } from '@/locales'
 import { NInput ,NButton,useMessage,NImage,NTooltip, NAutoComplete,NTag
 ,NPopover,NModal, NDropdown  } from 'naive-ui'
 import { SvgIcon } from '@/components/common';
 import { canVisionModel, GptUploader, mlog, upImg,getFileFromClipboard,isFileMp3
-    ,countTokens, checkDisableGpt4, Recognition } from '@/api';
+    ,countTokens, checkDisableGpt4, Recognition, regCookie } from '@/api';
 import { gptConfigStore, homeStore,useChatStore } from '@/store';
 import { AutoCompleteOptions } from 'naive-ui/es/auto-complete/src/interface';
 import { RenderLabel } from 'naive-ui/es/_internal/select-menu/src/interface';
@@ -14,6 +14,7 @@ import { useRoute } from 'vue-router'
 import aiModel from "@/views/mj/aiModel.vue"
 import AiMic from './aiMic.vue';
 import { useIconRender } from '@/hooks/useIconRender'
+import VueTurnstile from 'vue-turnstile';
 
 const { iconRender } = useIconRender()
 //import FormData from 'form-data'
@@ -207,8 +208,27 @@ const handleSelectASR = ( key: string | number )=>{
     if(key=='whisper')   st.value.showMic=true; 
 }
 
+
+const appearance = computed(() => {
+   return homeStore.myData.vtoken?'interaction-only':'always'
+})
+const tRef= ref();
+//const vt= ref<{thandel?:any}>({ });
+onMounted( ()=> { 
+   if(homeStore.myData.session.turnstile) {
+       setTimeout( tRef.value.render  ,4000 )
+       //vt.value.thandel= setInterval( tRef.value.reset , 8300)
+   }
+});
+// onUnmounted( ()=>{
+//     if(vt.value.thandel) clearInterval( vt.value.thandel)
+// });
+watch(()=> homeStore.myData.vtoken ,  regCookie  )
+
 </script>
 <template>
+<vue-turnstile ref="tRef"  :site-key="homeStore.myData.session.turnstile" :appearance="appearance"    v-model="homeStore.myData.vtoken" v-if="homeStore.myData.session.turnstile" />
+<!-- <div>{{ homeStore.myData.vtoken }}</div> -->
 <div v-if="st.showMic" class="  myinputs flex justify-center items-center" >
     <AiMic @cancel="st.showMic=false" @send="sendMic" />
 </div>

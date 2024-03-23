@@ -2,7 +2,7 @@ import express from 'express'
 import type { RequestProps } from './types'
 import type { ChatMessage } from './chatgpt'
 import { chatConfig, chatReplyProcess, currentModel } from './chatgpt'
-import { auth, authV2, verify } from './middleware/auth'
+import { auth, authV2, regCookie, turnstileCheck, verify } from './middleware/auth'
 import { limiter } from './middleware/limiter'
 import { isNotEmptyString,formattedDate } from './utils/is'
 import multer from "multer"
@@ -17,7 +17,6 @@ import FormData  from 'form-data'
 import axios from 'axios';
 import AWS  from 'aws-sdk';
 import { v4 as uuidv4} from 'uuid';
-
 
 
 const app = express()
@@ -92,10 +91,12 @@ router.post('/session', async (req, res) => {
     const theme = process.env.SYS_THEME?? "dark"; 
     const isCloseMdPreview = process.env.CLOSE_MD_PREVIEW?true:false
     const uploadType= process.env.UPLOAD_TYPE
+    const turnstile= process.env.TURNSTILE_SITE
 
     const data= { disableGpt4,isWsrv,uploadImgSize,theme,isCloseMdPreview,uploadType,
       notify , baiduId, googleId,isHideServer,isUpload, auth: hasAuth
       , model: currentModel(),amodel,isApiGallery,cmodels,isUploadR2,gptUrl
+      ,turnstile
     }
     res.send({  status: 'Success', message: '', data})
   }
@@ -105,6 +106,7 @@ router.post('/session', async (req, res) => {
 })
 
 router.post('/verify', verify)
+router.get('/reg', regCookie )
 
  const API_BASE_URL = isNotEmptyString(process.env.OPENAI_API_BASE_URL)
     ? process.env.OPENAI_API_BASE_URL
@@ -199,7 +201,7 @@ if(isUpload){
      res.json({ error:`server is no open uploader `,created:Date.now() })
   });
 }
-app.use('/uploads',authV2 , express.static('uploads'));
+app.use('/uploads' , express.static('uploads'));
 
 // R2Client function
 const R2Client = () => {
@@ -286,7 +288,7 @@ app.use(
  
 
 //代理openai 接口
-app.use('/openapi' ,authV2, proxy(API_BASE_URL, {
+app.use('/openapi' ,authV2, turnstileCheck, proxy(API_BASE_URL, {
   https: false, limit: '10mb',
   proxyReqPathResolver: function (req) {
     return req.originalUrl.replace('/openapi', '') // 将URL中的 `/openapi` 替换为空字符串
