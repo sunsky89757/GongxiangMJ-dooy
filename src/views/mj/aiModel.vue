@@ -33,7 +33,8 @@ model:[
             'claude-3-haiku-20240307',
 			'gemini-pro',
 			'gemini-pro-vision',
-			'tts-1'
+			'tts-1',
+            'suno-v3'
 			],
 			maxToken:4096
 }); 
