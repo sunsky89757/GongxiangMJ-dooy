@@ -25,6 +25,8 @@ model:[
 			'gpt-4-32k',
 			'gpt-4-vision-preview',
 			'gpt-4-all',
+            'gpt-4-turbo-2024-04-09',
+            'gpt-4-turbo',
 			'net-gpt-3.5-turbo',
 			'net-gpt-3.5-turbo-16k',
 			'net-gpt-4',
