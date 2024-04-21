@@ -36,6 +36,7 @@ model:[
 			'gemini-pro',
 			'gemini-pro-vision',
 			'tts-1',
+            'llama3-70b',
             'suno-v3'
 			],
 			maxToken:4096
