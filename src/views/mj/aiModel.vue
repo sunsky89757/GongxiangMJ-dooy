@@ -17,7 +17,6 @@ const config = ref({
 model:[ 
 			'gpt-3.5-turbo',
             'gpt-3.5-turbo-0125',
-			'gpt-3.5-turbo-1106',
             'gpt-4-turbo-preview',
             'gpt-4-0125-preview',
 			'gpt-4-1106-preview',
@@ -28,14 +27,11 @@ model:[
             'gpt-4-turbo-2024-04-09',
             'gpt-4-turbo',
 			'net-gpt-3.5-turbo',
-			'net-gpt-3.5-turbo-16k',
-			'net-gpt-4',
             'claude-3-opus-20240229',
             'claude-3-sonnet-20240229',
             'claude-3-haiku-20240307',
 			'gemini-pro',
 			'gemini-pro-vision',
-			'tts-1',
             'llama3-70b',
             'suno-v3'
 			],
