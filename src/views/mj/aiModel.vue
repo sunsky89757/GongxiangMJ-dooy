@@ -17,6 +17,8 @@ const config = ref({
 model:[ 
 			'gpt-3.5-turbo',
             'gpt-3.5-turbo-0125',
+            'gpt-4o-2024-05-13',
+            'gpt-4o',
             'gpt-4-turbo-preview',
             'gpt-4-0125-preview',
 			'gpt-4-1106-preview',
