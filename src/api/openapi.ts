@@ -20,10 +20,9 @@ export const KnowledgeCutOffDate: Record<string, string> = {
   "gpt-4-0125-preview": "2023-12",
   "gpt-4-vision-preview": "2023-04",
   "gpt-4-turbo-2024-04-09": "2023-12", 
-  "gpt-4o-2024-05-13": "2023-12", 
-  "gpt-4o": "2023-12", 
-  "gpt-4-turbo": "2023-12",
-  //gpt-4-turbo-2024-04-09
+  "gpt-4o-2024-05-13": "2023-10", 
+  "gpt-4o": "2023-10", 
+  "gpt-4-turbo": "2023-12", 
   "gpt-4-turbo-preview": "2023-12",
   "claude-3-opus-20240229": "2023-08",
   "claude-3-sonnet-20240229": "2023-08",
@@ -271,8 +270,14 @@ export const getSystemMessage = (uuid?:number )=>{
     let producer= 'You are ChatGPT, a large language model trained by OpenAI.'
     if(model.includes('claude')) producer=  'You are Claude, a large language model trained by Anthropic.';
     if(model.includes('gemini')) producer=  'You are Gemini, a large language model trained by Google.';
-      const DEFAULT_SYSTEM_TEMPLATE = `${producer}
-Knowledge cutoff: ${KnowledgeCutOffDate[model]??KnowledgeCutOffDate.default}
+    //用户自定义系统
+    if(homeStore.myData.session.systemMessage )  producer= homeStore.myData.session.systemMessage
+    
+    let DEFAULT_SYSTEM_TEMPLATE = `${producer}`;
+
+if ( KnowledgeCutOffDate[model] || model.indexOf('gpt-')>-1 )DEFAULT_SYSTEM_TEMPLATE+=`
+Knowledge cutoff: ${KnowledgeCutOffDate[model]??KnowledgeCutOffDate.default}`
+DEFAULT_SYSTEM_TEMPLATE+=`
 Current model: ${model}
 Current time: ${ new Date().toLocaleString()}
 Latex inline: $x^2$
@@ -282,7 +287,7 @@ return DEFAULT_SYSTEM_TEMPLATE;
 }
 export const subModel= async (opt: subModelType)=>{
     //
-    const model= opt.model?? ( gptConfigStore.myData.model?gptConfigStore.myData.model: "gpt-3.5-turbo");
+    let model= opt.model?? ( gptConfigStore.myData.model?gptConfigStore.myData.model: "gpt-3.5-turbo");
     let max_tokens= gptConfigStore.myData.max_tokens;
     let temperature= 0.5;
     let top_p= 1;
@@ -297,6 +302,11 @@ export const subModel= async (opt: subModelType)=>{
         max_tokens= gStore.max_tokens;
     }
     if(model=='gpt-4-vision-preview' && max_tokens>2048) max_tokens=2048;
+
+    //gptServerStore.myData.GPTS_GX
+    if( gptServerStore.myData.GPTS_GX ){
+        model= model.replace('gpt-4-gizmo-','')
+    }
 
     let body ={
             max_tokens ,

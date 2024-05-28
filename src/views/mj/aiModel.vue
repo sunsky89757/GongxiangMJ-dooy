@@ -63,16 +63,22 @@ const modellist = computed(() => { //
     if( homeStore.myData.session.cmodels ){
         let delModel:string[] = [];
         let addModel:string[]=[];
+        let isDelAll= false
         homeStore.myData.session.cmodels.split(/[ ,]+/ig).map( (v:string)=>{
             if(v.indexOf('-')==0){
                 delModel.push(v.substring(1))
+                if( v=='-all') isDelAll=true;
             }else{
                 addModel.push(v);
             }
         });
         mlog('cmodels',delModel,addModel);
+        if( isDelAll  )rz=[];
         rz= rz.filter(v=> delModel.indexOf(v.value)==-1 );
         addModel.map(o=>rz.push({label:o,value:o}) )
+        if (rz.length==0){
+            rz.push({label:'gpt-3.5-turbo',value:'gpt-3.5-turbo'}) 
+        }
     }
 
     let uniqueArray: { label: string, value: string }[] = Array.from(
@@ -97,9 +103,9 @@ const saveChat=(type:string)=>{
  
 watch(()=>nGptStore.value.model,(n)=>{
     nGptStore.value.gpts=undefined;
-    let max=4096;
+    let max=4096*2*2;
     if( n.indexOf('vision')>-1){
-        max=4096;
+        max=4096*2;
     }else if( n.indexOf('gpt-4')>-1 ||  n.indexOf('16k')>-1 ){ //['16k','8k','32k','gpt-4'].indexOf(n)>-1
         max=4096*2;
     }else if( n.toLowerCase().includes('claude-3') ){

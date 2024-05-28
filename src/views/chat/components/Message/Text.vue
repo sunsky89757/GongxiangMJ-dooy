@@ -15,7 +15,7 @@ import whisperText from '@/views/mj/whisperText.vue'
 import MjTextAttr from '@/views/mj/mjTextAttr.vue'
 import aiTextSetting from '@/views/mj/aiTextSetting.vue'
 import aiSetAuth from '@/views/mj/aiSetAuth.vue'
-import { isApikeyError, isAuthSessionError, isTTS } from '@/api'
+import { isApikeyError, isAuthSessionError, isTTS, mlog } from '@/api'
 
 interface Props {
   inversion?: boolean
@@ -51,7 +51,7 @@ mdi.use(mdKatex, { blockClass: 'katexmath-block rounded-md p-[10px]', errorColor
 const wrapClass = computed(() => {
   return [
     'text-wrap',
-    'min-w-[20px]',
+    'min-w-[20px]','max-w-[810px]',
     'rounded-md',
     isMobile.value ? 'p-2' : 'px-3 py-2',
     props.inversion ? 'bg-[#d2f9d1]' : 'bg-[#f4f6f8]',
@@ -62,9 +62,17 @@ const wrapClass = computed(() => {
 })
 
 const text = computed(() => {
-  const value = props.text ?? ''
-  if (!props.asRawText)
+  let value = props.text ?? ''
+  if (!props.asRawText){
+    value = value.replace(/\\\( *(.*?) *\\\)/g, '$$$1$$');
+    //value = value.replace(/\\\((.*?)\\\)/g, '$$$1$$');
+    value = value.replace(/\\\[ *(.*?) *\\\]/g, '$$$$$1$$$$');
+    //
+    value= value.replaceAll('\\[',"$$$$")
+    value= value.replaceAll('\\]',"$$$$")   
+    //mlog('replace', value)
     return mdi.render(value)
+  }
   return value
 })
 
