@@ -7,6 +7,7 @@ import { useBasicLayout } from '@/hooks/useBasicLayout'
 import { debounce } from '@/utils/functions/debounce'
 import { chatSetting, mlog } from '@/api'
 import AiListText from '@/views/mj/aiListText.vue'
+import { sleep } from '@/api/suno'
 
 const { isMobile } = useBasicLayout()
 
@@ -53,7 +54,14 @@ function isActive(uuid: number) {
 
 const chatSet= new chatSetting( chatStore.active??1002);
 const myuid= ref<gptConfigType[]>( []) //computed( ()=>chatSet.getObjs() ) ;
-const toMyuid= ( )=> myuid.value= chatSet.getObjs();
+
+//找假死的原因了 修复卡死
+const toMyuid=  debounce(  ()=>{
+    mlog('toMyuid7' );
+   // await sleep(500);
+    myuid.value= chatSet.getObjs(); //用了 这个就会卡死？
+   },600);
+
 toMyuid();
 const isInObjs= (uuid:number):undefined|gptConfigType =>{
   if(!myuid.value.length) return ;
@@ -61,7 +69,7 @@ const isInObjs= (uuid:number):undefined|gptConfigType =>{
     return item.uuid==uuid
   })
   if(index==-1) return ;
-  mlog('index',index, myuid.value[index]  );
+  mlog('index 这个地方有bug',uuid,index, myuid.value[index]  );
   return myuid.value[index] ;
 }
 watch(()=>homeStore.myData.act,(n:string)=>n=='saveChat' && toMyuid() , {deep:true})

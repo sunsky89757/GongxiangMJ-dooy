@@ -35,15 +35,13 @@
 - [X] chatgpt 支持 GPTs 多模态
 - [X] chatgpt 支持 tts whisper
 - [X] 即时语音识别(浏览器自带语音识别 ASR) `v2.15.7`以上版本
-- [X] 支持超链更换设置，适合 one-api 部署聊天 https://vercel.ddaiai.com/#/s/t?OPENAI_API_BASE_URL=https://abc.com&OPENAI_API_KEY=sk-xxxxx&MJ_SERVER=https://abc.com&MJ_API_SECRET=sk-xxx&UPLOADER_URL=
-- [X] 支持one-api部署聊天 https://vercel.ddaiai.com/#/?settings={%22key%22:%22sk-abc%22,%22url%22:%22https://www.abc.com%22} `(v.2.14.3)`
-## 待开发
-- ⏰ ....
+- [X] 支持超链更换设置，适合`one-api` `new-api`部署聊天 https://vercel.ddaiai.com/#/s/t?OPENAI_API_BASE_URL=https://abc.com&OPENAI_API_KEY=sk-xxxxx&MJ_SERVER=https://abc.com&MJ_API_SECRET=sk-xxx&UPLOADER_URL=
+- [X] 支持`one-api`、`new-api`部署聊天 https://vercel.ddaiai.com/#/?settings={%22key%22:%22sk-abc%22,%22url%22:%22https://www.abc.com%22} `(v.2.14.3)`
 
 ## 无服务器-个人桌面安装
 > - [x] 请到 https://github.com/Dooy/chatgpt-web-midjourney-proxy/releases 下载最新版本安装(选择合适你操作系统的版本)
 > - [x] 选择一个合适的中转服务商( 最好都支持 `gpt`, `gpts`, `midjourney`, `claude`, `suno` )
-> - [x] 中转服务商推荐 https://www.openai-hk.com `一个接口` + `一个key` 支持 `gpt` `midjourney` `claude` `suno`
+> - [x] 中转服务商推荐 https://www.openai-hk.com 一个`key`和`api接口地址` 同时支持 `gpt` `midjourney` `claude` `suno`，mj-fast最低能到0.12rmb/张
 ![多模态](./docs/suno-ds.jpg)
 
 ## Vercel 一键部署
