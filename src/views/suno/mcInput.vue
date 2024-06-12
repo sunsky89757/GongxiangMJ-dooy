@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref,computed ,onMounted} from 'vue';
-import { NTabs ,NTabPane ,NInput,NSwitch ,NTooltip, NTag ,NButton, useMessage} from "naive-ui";
+import { NTabs ,NTabPane ,NInput,NSwitch ,NTooltip, NTag ,NButton, useMessage,NSelect} from "naive-ui";
 import { SvgIcon } from '@/components/common';
 import { mlog } from '@/api';
 import { sunoFetch ,lyricsFetch, randStyle, FeedTask} from '@/api/suno';
@@ -11,18 +11,23 @@ const st = ref({type:'custom',isLoading:false})
 const des= ref( {
   "gpt_description_prompt": "",
   "make_instrumental": false,
-  "mv": "chirp-v3-0",
+  "mv": "chirp-v3-5",
   "prompt": ""
 });
 const cs= ref({
   "prompt": "",
-  "mv": "chirp-v3-0",
+  "mv": "chirp-v3-5",
   "title": "",
   "tags": "",
   "continue_at": 120,
   "continue_clip_id": ""
 
 });
+
+const mvOption= [
+{label: 'verion: v3.5',value: 'chirp-v3-5'}
+,{label:'verion: v3',value: 'chirp-v3-0'}
+ ]
 
 const canPost = computed(() => {
    // return true; 
@@ -125,6 +130,9 @@ const generate= async ()=>{
                 :placeholder="$t('suno.descpls')"  type="textarea"  size="small"   
                 :autosize="{ minRows: 3, maxRows: 12  }"  />
             </div>
+            <div  class="pt-1">
+                 <n-select v-model:value="des.mv" :options="mvOption" size="small" />
+            </div>
         </n-tab-pane>
 
         <n-tab-pane name="custom" :tab="$t('suno.custom')">
@@ -166,9 +174,12 @@ const generate= async ()=>{
                 </div>
             </div>
             <div  class="pt-1"> 
-            <n-input v-model:value="cs.prompt" :disabled="des.make_instrumental"
+                <n-input v-model:value="cs.prompt" :disabled="des.make_instrumental"
                 :placeholder="$t('suno.lypls')" type="textarea"  size="small"   
                 :autosize="{ minRows: 3, maxRows: 12  }"  />
+            </div>
+            <div  class="pt-1">
+                <n-select v-model:value="cs.mv" :options="mvOption" size="small" />
             </div>
         </n-tab-pane>
     </n-tabs>
