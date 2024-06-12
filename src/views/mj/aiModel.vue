@@ -35,7 +35,8 @@ model:[
 			'gemini-pro',
 			'gemini-pro-vision',
             'llama3-70b',
-            'suno-v3'
+            'suno-v3',
+            'suno-v3.5'
 			],
 			maxToken:4096
 }); 
