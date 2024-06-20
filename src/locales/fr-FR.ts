@@ -401,7 +401,31 @@ export default {
     "menuinfo": "Création musicale Suno",
     "server": "Point de terminaison de l'API Suno",
     "serverabout": "Lié à Suno",
-    "setOpenKeyPlaceholder": "Clé associée pour l'API Suno ; facultatif"
+    "setOpenKeyPlaceholder": "Clé associée pour l'API Suno ; facultatif",
+
+    upMps: 'Télécharger l\'audio',
+    extend: 'Étendre',
+    extendFrom: 'Étendre depuis',
+    extendAt: 'Commencer l\'extension à',
+    fail: 'Échec',
+    info: 'Instructions :<br>La durée de l\'audio téléchargé doit être comprise entre 6s et 60s'
 
    }
+   ,video:{
+    "menu": "Vidéos",
+    "menuinfo": "Création de vidéos Luam et autres",
+    "descpls": "Description de création de vidéos",
+    "lumaabout": "À propos de Luma",
+    "lumaserver": "Adresse de l'API Luma",
+    "setOpenKeyPlaceholder": "Clé API Luma, facultatif",
+    "generate": "Générer la vidéo",
+    "nodata": "Aucune vidéo disponible, veuillez d'abord générer !",
+    "selectimg": "Sélectionner une image",
+    "clear": "Effacer",
+    "plsInput": "Veuillez saisir du contenu !",
+    "submitSuccess": "Soumis avec succès !",
+    "process": "Génération de la vidéo...",
+    "repeat": "Réessayer"
+    }
+
   }

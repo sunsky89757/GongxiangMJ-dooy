@@ -407,6 +407,29 @@ export default {
     "server": "Suno API Endpoint",
     "serverabout": "Suno Related",
     "setOpenKeyPlaceholder": "Related KEY for Suno API; optional"
+
+    ,upMps:'Upload'
+    ,extend:'Extend'
+    ,extendFrom:'Extend From'
+    ,extendAt:'Extend at'
+    ,fail:'Fail'
+    ,info:'Note: <br> Uploaded audio must be between 6 seconds and 60 seconds in duration.'
+  }
+   ,video: {
+    menu: "Videos",
+    menuinfo: "Luam and other video generate",
+    descpls: "Video generate description",
+    lumaabout: "About Luma",
+    lumaserver: "Luma API endpoint",
+    setOpenKeyPlaceholder: "Key for Luma API, optional",
+    generate: "Generate video",
+    nodata: "No available videos, please generate first!",
+    selectimg: "Select image",
+    clear: "Clear",
+    plsInput: "Please input content!",
+    submitSuccess: "Submitted successfully!",
+    process: "Video generating...",
+    repeat: "Get again"
   }
 
 
