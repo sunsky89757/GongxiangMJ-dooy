@@ -357,6 +357,7 @@ export default {
 		},
 		versionList: {
 			mjV6: "MJ V6",
+			mjV61: "MJ V6.1",
 			mjV52: "MJ V5.2",
 			mjV51: "MJ V5.1",
 			nijiV6: "Niji V6",
@@ -412,7 +413,7 @@ export default {
    }
    ,video:{
     "menu": "비디오",
-    "menuinfo": "Luam 및 다른 비디오 제작",
+    "menuinfo": "Luma 및 다른 비디오 제작",
     "descpls": "비디오 제작 설명",
     "lumaabout": "Luma에 대해",
     "lumaserver": "Luma API 엔드포인트",
@@ -424,7 +425,41 @@ export default {
     "plsInput": "내용을 입력하세요!",
     "submitSuccess": "성공적으로 제출되었습니다!",
     "process": "비디오 생성 중...",
-    "repeat": "재시도"
-  }
+    "repeat": "재시도",
+
+    "lumainfo": "설명: <ul><li>1. Pro 및 relax 데모 비디오는 워터마크가 있는 링크입니다.</li><li>2. 워터마크 없는 Pro 버전은 '다운로드' 버튼을 통해 다운로드 링크를 받아야 합니다.</li><li>3. Pro 버전 링크는 시간 제한이 있으며, MP4 파일을 로컬에 즉시 저장해야 합니다.</li><li>4. Pro 버전은 생성 후 30분 이내에 MP4 파일을 로컬에 저장해야 하며, 채널이 차단되거나 중단될 수 있습니다.</li><li>5. Pro 버전의 다운로드 링크가 무효일 경우 워터마크가 있는 비디오 링크가 제공됩니다.</li></ul>",
+    "runwayabout": "Runway 관련",
+    "runwayserver": "Runway API 주소",
+    "setOpenKeyPlaceholder2": "Runway API 키, 선택 사항",
+    "endImg": "마지막 이미지",
+    "runwayinfo": "설명: <ul><li>1. Runway 이미지 및 비디오는 유효 기간이 있습니다.</li><li>2. 비디오 생성 후 30분 이내에 MP4 파일을 로컬에 저장해주세요.</li></ul>",
+    "nosup": "일시적으로 지원되지 않음",
+    "rwgen2": "버전: Gen-2, 비용 효율적",
+    "rwgen3": "버전: Gen-3 Alpha",
+    "repeat2":"Expired.Reget"
+
+  },
+  dance:{
+    menu: "댄스",
+    menuinfo: "Viggle 및 기타와 함께 댄스 비디오 제작",
+    character: "캐릭터",
+    viggleabout: "Viggle 소개",
+    viggleserver: "Viggle API 엔드포인트",
+    setOpenKeyPlaceholder: "Viggle API 키, 선택 사항",
+    info: "지침:<br>1. 캐릭터 이미지는 전신 사진이 좋습니다.<br>2. 댄스 템플릿 비디오는 개인 비디오여야 하며, 그룹 댄스가 아니어야 합니다.",
+    model: "모델",
+    bgw: "백색 배경",
+    bgg: "초록색 배경",
+    bgmoban: "템플릿 배경",
+    bgrole: "캐릭터 배경",
+    gring: "생성 중...",
+    uprolefirst: "먼저 캐릭터 이미지를 업로드하세요",
+    uprolefail: "업로드 실패",
+    upvideo: "+ 템플릿 댄스 비디오 업로드",
+    usevideo: "+ 공식 템플릿 사용",
+    moban: "댄스 템플릿",
+    moban2: "템플릿 이름",
+    use: "사용"
+}
 
 }

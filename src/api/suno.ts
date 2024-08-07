@@ -42,6 +42,7 @@ export const lyricsFetch= async ( lid:string)=>{
         let time= (i+1)
         if(time>20) time=20;
         if(dt.status=='complete') return dt ;
+        if( dt.status=='error') return null;
         await sleep( time*1000 )
         
     }
@@ -74,7 +75,7 @@ export const FeedTask= async (ids:string[])=>{
         }
     });
     homeStore.setMyData({act:'FeedTask'});
-    await sleep(5*1000 );
+    await sleep(5*1020 );
     FeedTask(ids)
 
 }

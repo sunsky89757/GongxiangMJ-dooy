@@ -358,6 +358,7 @@ export default {
 		},
 		versionList: {
 			mjV6: "MJ V6",
+			mjV61: "MJ V6.1",
 			mjV52: "MJ V5.2",
 			mjV51: "MJ V5.1",
 			nijiV6: "Niji V6",
@@ -413,7 +414,7 @@ export default {
    }
    ,video:{
     "menu": "Vidéos",
-    "menuinfo": "Création de vidéos Luam et autres",
+    "menuinfo": "Création de vidéos Luma et autres",
     "descpls": "Description de création de vidéos",
     "lumaabout": "À propos de Luma",
     "lumaserver": "Adresse de l'API Luma",
@@ -425,7 +426,39 @@ export default {
     "plsInput": "Veuillez saisir du contenu !",
     "submitSuccess": "Soumis avec succès !",
     "process": "Génération de la vidéo...",
-    "repeat": "Réessayer"
+    "repeat": "Réessayer",
+    "lumainfo": "Explication : <ul><li>1. Les vidéos de démonstration Pro et relax ont des liens avec des filigranes.</li><li>2. La version Pro sans filigrane nécessite d'obtenir le lien de téléchargement via le bouton 'Télécharger'.</li><li>3. Les liens pour les versions Pro sont limités dans le temps ; veuillez sauvegarder le fichier MP4 localement dès que possible.</li><li>4. Pour les versions Pro, sauvegardez le fichier MP4 localement dans les 30 minutes suivant la génération, car le canal peut être bloqué ou arrêté.</li><li>5. Si le lien de téléchargement pour les versions Pro est invalide, un lien vidéo avec filigrane sera fourni.</li></ul>",
+    "runwayabout": "Lié à Runway",
+    "runwayserver": "Adresse de l'API Runway",
+    "setOpenKeyPlaceholder2": "Clé API Runway, facultative",
+    "endImg": "Image de fin",
+    "runwayinfo": "Explication : <ul><li>1. Les images et vidéos de Runway ont une durée de validité.</li><li>2. Veuillez sauvegarder le fichier MP4 localement dans les 30 minutes suivant la génération de la vidéo.</li></ul>",
+    "nosup": "Non pris en charge temporairement",
+    "rwgen2": "Version : Gen-2, rentable",
+    "rwgen3": "Version : Gen-3 Alpha",
+    "repeat2":"Expired.Reget"
+    },
+    dance:{
+        menu: "Danse",
+        menuinfo: "Créez des vidéos de danse avec Viggle et d'autres.",
+        character: "Personnage",
+        viggleabout: "À propos de Viggle",
+        viggleserver: "Adresse API Viggle",
+        setOpenKeyPlaceholder: "Clé API Viggle, facultatif",
+        info: "Instructions :<br>1. Les images de personnage devraient de préférence être des photos en pied.<br>2. Les vidéos de modèles de danse devraient être des vidéos personnelles, pas des danses de groupe.",
+        model: "Modèle",
+        bgw: "Arrière-plan blanc",
+        bgg: "Arrière-plan vert",
+        bgmoban: "Arrière-plan du modèle",
+        bgrole: "Arrière-plan du personnage",
+        gring: "En cours de génération...",
+        uprolefirst: "Veuillez d'abord télécharger l'image du personnage",
+        uprolefail: "Échec du téléchargement",
+        upvideo: "+ Télécharger la vidéo de modèle de danse",
+        usevideo: "+ Utiliser le modèle officiel",
+        moban: "Modèle de danse",
+        moban2: "Nom du modèle",
+        use: "Utiliser"
     }
 
   }

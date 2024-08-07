@@ -352,6 +352,7 @@ export default {
 		},
 		versionList: {
 			mjV6: "MJ V6",
+			mjV61: "MJ V6.1",
 			mjV52: "MJ V5.2",
 			mjV51: "MJ V5.1",
 			nijiV6: "Niji V6",
@@ -407,7 +408,7 @@ export default {
    }
    ,video:{
     "menu": "視頻",
-    "menuinfo": "Luam及其他視頻創作",
+    "menuinfo": "Luma及其他視頻創作",
     "descpls": "視頻創作描述",
     "lumaabout": "關於Luma",
     "lumaserver": "Luma API端點",
@@ -419,7 +420,40 @@ export default {
     "plsInput": "請輸入內容！",
     "submitSuccess": "提交成功！",
     "process": "視頻生成中...",
-    "repeat": "重新獲取"
-  }
+    "repeat": "重新獲取",
+
+    "lumainfo": "說明：<ul><li>1. Pro 和 relax 演示視頻都有水印的鏈接</li><li>2. Pro 無水印版本需要通過「下載按鈕」得到下載鏈接</li><li>3. Pro 得到的鏈接有時限；請及時保存 MP4 文件到本地</li><li>4. Pro 請在生成後的 30 分鐘內；將 MP4 保存到本地，渠道號也可能被封或者下線</li><li>5. Pro 當下載鏈接無效時會給出帶水印的視頻鏈接</li></ul>",
+    "runwayabout": "Runway 相關",
+    "runwayserver": "Runway 接口地址",
+    "setOpenKeyPlaceholder2": "Runway API 的key, 可不填",
+    "endImg": "尾幀圖",
+    "runwayinfo": "說明：<ul><li>1. Runway 圖片與視頻都有有效期</li><li>2. 請在生成視頻後 30 分鐘內將 MP4 保存到本地</li></ul>",
+    "nosup": "暫不支持",
+    "rwgen2": "版本: Gen-2, 價格實惠",
+    "rwgen3": "版本: Gen-3 Alpha",
+    "repeat2":"Expired.Reget"
+  },
+  dance:{
+    menu: "跳舞",
+    menuinfo: "使用 Viggle 等創作舞蹈影片。",
+    character: "人物角色",
+    viggleabout: "關於 Viggle",
+    viggleserver: "Viggle API 接口地址",
+    setOpenKeyPlaceholder: "Viggle API 的 key，可選填",
+    info: "說明：<br>1. 角色圖片最好是全身照片。<br>2. 舞蹈模板影片最好是個人影片，不要是團體舞蹈。",
+    model: "模型",
+    bgw: "白色背景",
+    bgg: "綠色背景",
+    bgmoban: "模板背景",
+    bgrole: "角色背景",
+    gring: "生成中...",
+    uprolefirst: "請先上傳角色圖片",
+    uprolefail: "上傳失敗",
+    upvideo: "+ 上傳模板跳舞影片",
+    usevideo: "+ 使用官方模板",
+    moban: "跳舞模板",
+    moban2: "模板名稱",
+    use: "使用"
+}
 
 }

@@ -18,22 +18,17 @@ model:[
 			'gpt-3.5-turbo',
             'gpt-3.5-turbo-0125',
             'gpt-4o',
+            'gpt-4o-2024-08-06',
             'gpt-4-turbo-preview',
             'gpt-4-0125-preview',
 			'gpt-4-1106-preview',
 			'gpt-4',
-			'gpt-4-32k',
-			'gpt-4-vision-preview',
 			'gpt-4-all',
             'gpt-4-turbo',
-			'net-gpt-3.5-turbo',
             'claude-3-opus-20240229',
-            'claude-3-sonnet-20240229',
             'claude-3-haiku-20240307',
             'claude-3-5-sonnet-20240620',
-			'gemini-1.5-pro',
             'llama3-70b',
-            'suno-v3',
             'suno-v3.5',
             'luma-video'
 			],
@@ -106,6 +101,8 @@ watch(()=>nGptStore.value.model,(n)=>{
     let max=4096*2*2;
     if( n.indexOf('vision')>-1){
         max=4096*2;
+    }else if( n=='gpt-4o-2024-08-06' ){  
+        max=16384 *2;
     }else if( n.indexOf('gpt-4')>-1 ||  n.indexOf('16k')>-1 ){ //['16k','8k','32k','gpt-4'].indexOf(n)>-1
         max=4096*2;
     }else if( n.toLowerCase().includes('claude-3') ){
@@ -148,7 +145,7 @@ onMounted(() => {
      </div>
      <div class=" flex justify-end items-center w-[80%] max-w-[240px]">
         <div class=" w-[200px]"><n-slider v-model:value="nGptStore.talkCount" :step="1" :max="50" /></div>
-        <div  class="w-[40px] text-right">{{ nGptStore.talkCount }}</div>
+        <div  class="w-[50px] text-right">{{ nGptStore.talkCount }}</div>
     </div>
 </section>
 <div class="mb-4 text-[12px] text-gray-300 dark:text-gray-300/20">{{ $t('mjchat.historyToken') }}</div>
@@ -158,7 +155,7 @@ onMounted(() => {
      </div>
      <div class=" flex justify-end items-center w-[80%] max-w-[240px]">
         <div class=" w-[200px]"><n-slider v-model:value="nGptStore.max_tokens" :step="1" :max="config.maxToken" :min="1" /></div>
-        <div  class="w-[40px] text-right">{{ nGptStore.max_tokens }}</div>
+        <div  class="w-[50px] text-right">{{ nGptStore.max_tokens }}</div>
     </div>
 </section>
 <div class="mb-4 text-[12px] text-gray-300 dark:text-gray-300/20">{{ $t('mjchat.historyTCntInfo') }}  </div>
