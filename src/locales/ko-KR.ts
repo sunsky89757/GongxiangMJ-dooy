@@ -60,6 +60,7 @@ export default {
     avatarLink: '아바타 링크',
     name: '이름',
     description: '설명',
+    backgroundImage: '배경 이미지',
     role: '역할',
     temperature: '온도',
     top_p: 'Top_p',
@@ -190,7 +191,26 @@ export default {
 
     subtle: '고화질 2배'
     ,creative: '고화질 2배. 창의적'
-    ,gpt_gx: 'GPTs는 g-*를 사용합니다'
+    ,gpt_gx: 'GPTs는 g-*를 사용합니다',
+
+    "ideoabout": "아이디어그램에 대하여",
+    "ideoserver": "아이디어그램 서버",
+    "ideokeyPlaceholder": "아이디어그램의 API 키 (선택 사항)",
+    "ideopls": "이미지 설명 프롬프트",
+    "nohead": "포함하지 않음",
+
+    klingabout: '클링 관련',
+    klingserver: '클링 API 주소',
+    klingkeyPlaceholder: '클링 API 키 (선택 사항)',
+    klingkey: '클링 키',
+    mode: '모드',
+    duration: '지속 시간',
+    negative_prompt: '여기에 객체가 없는 텍스트를 입력하세요',
+    std: '고성능',
+    pro: '고품질',
+    needImg: '효과를 보려면 참조 이미지를 업로드하세요!',
+    seed: '시드 번호 1~2147483647',
+    klingInfo: '설명: <li>1. 고품질은 가격의 3.5배입니다</li> <li>2. 10초는 가격의 2배입니다</li> <li>3. 마지막 프레임은 효과를 위해 참조 이미지가 필요합니다</li>'
 
   },
   "mjset": {

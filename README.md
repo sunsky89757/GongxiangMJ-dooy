@@ -10,7 +10,11 @@
 
 ![cover](./docs/mj2a1.jpg)
 ## 支持功能 
+- [x] 支持 kling 可灵 文生视频，图生视频, 绘图
+- [x] 支持 ideogram 绘图
+- [x] 支持 runway 文生视频，图生视频
 - [x] 支持 luma 文生视频，图生视频
+- [x] 支持 viggle 舞蹈
 - [x] 支持 suno 单独模块，可歌词调整 曲风调整
 - [x] 支持 suno 以音频生成音频
 - [x] 原chatgpt web 所有功能
@@ -40,13 +44,13 @@
 - [X] chatgpt 支持 GPTs 多模态
 - [X] chatgpt 支持 tts whisper
 - [X] 即时语音识别(浏览器自带语音识别 ASR) `v2.15.7`以上版本
-- [X] 支持超链更换设置，适合`one-api` `new-api`部署聊天 https://vercel.ddaiai.com/#/s/t?OPENAI_API_BASE_URL=https://abc.com&OPENAI_API_KEY=sk-xxxxx&MJ_SERVER=https://abc.com&MJ_API_SECRET=sk-xxx&UPLOADER_URL=
-- [X] 支持`one-api`、`new-api`部署聊天 https://vercel.ddaiai.com/#/?settings={%22key%22:%22sk-abc%22,%22url%22:%22https://www.abc.com%22} `(v.2.14.3)`
+- [X] 支持超链更换设置，适合`one-api` `new-api`部署聊天(<b color="red">为了安全，此方式请使用自己域名</b>) https://mj.your-name.com/#/s/t?OPENAI_API_BASE_URL=https://abc.com&OPENAI_API_KEY=sk-xxxxx&MJ_SERVER=https://abc.com&MJ_API_SECRET=sk-xxx&UPLOADER_URL=
+- [X] 支持`one-api`、`new-api`部署聊天 (<b color="red">为了安全，此方式请使用自己域名</b>) https://mj.your-name.com/#/?settings={%22key%22:%22sk-abc%22,%22url%22:%22https://www.abc.com%22} `(v.2.14.3)`
 
 ## 无服务器-个人桌面安装
 > - [x] 请到 https://github.com/Dooy/chatgpt-web-midjourney-proxy/releases 下载最新版本安装(选择合适你操作系统的版本)
-> - [x] 选择一个合适的中转服务商( 最好都支持 `gpt`  `gpts` `midjourney` `claude`  `suno` `luma` )
-> - [x] 中转服务商推荐 https://www.openai-hk.com 一个`key`和`api接口地址` 同时支持 `gpt` `midjourney` `claude` `suno` `luma`，mj-fast最低能到0.12rmb/张,`suno` 最低能到官网半价, `luma`最低能到0.16rmb/次
+> - [x] 选择一个合适的中转服务商( 最好都支持 `gpt`  `gpts` `midjourney` `claude`  `suno` `luma` `runway` `viggle` `flux` `ideogram` `kling` )
+> - [x] 中转服务商推荐 https://www.openai-hk.com 一个`key`和`api接口地址` 同时支持 [gpt](https://www.openai-hk.com/docs/getting-started.html) [gpts](https://www.openai-hk.com/docs/openai/gpts.html) [midjourney](https://www.openai-hk.com/docs/midjourney/guide.html) [claude](https://www.openai-hk.com/docs/lab/claude-3.html) [suno](https://www.openai-hk.com/docs/lab/suno-v3.html) [luma](https://www.openai-hk.com/docs/lab/luma-video.html) [runway](https://www.openai-hk.com/docs/lab/runway-video.html) [viggle](https://www.openai-hk.com/docs/lab/viggle-dance.html) [ideogram](https://www.openai-hk.com/docs/lab/ideogram.html) [flux](https://www.openai-hk.com/docs/lab/flux.html) [kling](https://www.openai-hk.com/docs/lab/kling.html)，mj-fast最低能到0.12rmb/张,`suno` 最低能到6分一首, `luma`最低能到0.16rmb/次
 ![多模态](./docs/suno-ds.jpg)
 
 ## Vercel 一键部署

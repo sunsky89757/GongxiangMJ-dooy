@@ -9,6 +9,8 @@ import { t } from "@/locales";
 import { ChatMessage } from "gpt-tokenizer/esm/GptEncoding";
 import { chatSetting } from "./chat";
 import { MessageApiInjection } from "naive-ui/es/message/src/MessageProvider";
+import { ideoSubmit } from "./ideo";
+import { error } from "console";
 //import {encode,  encodeChat}  from "gpt-tokenizer"
 //import {encode,  encodeChat} from "gpt-tokenizer/cjs/encoding/cl100k_base.js";
 //import { get_encoding } from '@dqbd/tiktoken'
@@ -25,7 +27,8 @@ export const KnowledgeCutOffDate: Record<string, string> = {
   "gpt-4o": "2023-10", 
   "gpt-4o-mini": "2023-10", 
   "gpt-4o-mini-2024-07-18": "2023-10", 
-  "gpt-4o-2024-08-06": "2023-10", 
+  "gpt-4o-2024-08-06": "2023-10", //chatgpt-4o-latest
+  "chatgpt-4o-latest": "2023-10", 
   "gpt-4-turbo": "2023-12", 
   "gpt-4-turbo-preview": "2023-12",
   "claude-3-opus-20240229": "2023-08",
@@ -213,8 +216,26 @@ export const subGPT= async (data:any, chat:Chat.Chat )=>{
    let d:any;
    let action= data.action;
    //chat.myid=  `${Date.now()}`;
-   if(  action=='gpt.dall-e-3' ){ //执行变化
+   if(  action=='gpt.dall-e-3' && data.data && data.data.model && data.data.model.indexOf('ideogram')>-1 ){ //ideogram
+         mlog("ddlog 数据 ", data.data  )
+         try{
+            let d= await ideoSubmit(data.data );
+            mlog("ddlog 数据返回 ", d  )
+             const rz = d[0];
+            chat.text= rz.prompt//rz.p??`图片已完成`;
+            chat.opt={imageUrl:rz.url } ;
+            chat.loading = false;
+            homeStore.setMyData({act:'updateChat', actData:chat });
+
+         }catch(e){
+            //chat.text='失败！'+"\n```json\n"+JSON.stringify(d, null, 2)+"\n```\n";
+            chat.text='失败！'+"\n```json\n"+   e  +"\n```\n";
+            chat.loading=false;
+            homeStore.setMyData({act:'updateChat', actData:chat });
+         }
+   }else if(  action=='gpt.dall-e-3' ){ //执行变化
        // chat.model= 'dall-e-3';
+       
 
        let d= await gptFetch('/v1/images/generations', data.data);
        try{
@@ -224,13 +245,22 @@ export const subGPT= async (data:any, chat:Chat.Chat )=>{
             chat.loading = false;
             homeStore.setMyData({act:'updateChat', actData:chat });
        }catch(e){
-            chat.text='失败！'+"\n```json\n"+JSON.stringify(d, null, 2)+"\n```\n";
+            //chat.text='失败！'+"\n```json\n"+JSON.stringify(d, null, 2)+"\n```\n";
+            chat.text='失败！'+"\n```json\n"+ (d?JSON.stringify(d, null, 2):e) +"\n```\n";
             chat.loading=false;
             homeStore.setMyData({act:'updateChat', actData:chat });
        }
 
    }
 
+}
+
+export const isDallImageModel =(model:string|undefined)=>{
+    if(!model) return false;
+    if( model.indexOf('flux')>-1 ) return true; 
+    if( model.indexOf('ideogram')>-1 ) return true; 
+    return ['dall-e-2' ,'dall-e-3','ideogram' ].indexOf(model)>-1
+      
 }
 
 interface subModelType{
@@ -463,10 +493,19 @@ export const openaiSetting= ( q:any,ms:MessageApiInjection )=>{
                 MJ_SERVER:url, 
                 SUNO_SERVER:url,
                 LUMA_SERVER:url,
+                RUNWAY_SERVER:url,
+                VIGGLE_SERVER:url,
+                IDEO_SERVER:url,
+                KLING_SERVER:url,
+                
                 OPENAI_API_KEY:key,
                 MJ_API_SECRET:key, 
                 SUNO_KEY:key,
-                LUMA_KEY:key
+                LUMA_KEY:key,
+                RUNWAY_KEY:key,
+                VIGGLE_KEY:key,
+                IDEO_KEY:url,
+                KLING_KEY:url,
              } )
             blurClean();
             gptServerStore.setMyData( gptServerStore.myData );
@@ -580,7 +619,6 @@ export const getHistoryMessage= async (dataSources:Chat.Chat[],loadingCnt=1 ,sta
                let fileBase64= JSON.parse(str) as string[];
                let arr =  fileBase64.filter( (ff:string)=>ff.indexOf('http')>-1);
                if(arr.length>0) content = arr.join(' ')+' '+ content ;
-
                mlog(t('mjchat.attr') ,o.opt.images[0] , content );
             }catch(ee){
             }

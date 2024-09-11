@@ -2,15 +2,17 @@
 import { mlog, upImg } from '@/api';
 import { runwayFeed, runwayFetch, runwayUpload } from '@/api/runway';
 import { gptServerStore, homeStore } from '@/store';
-import { useMessage,NInput,NButton, NTag,NSelect } from 'naive-ui';
+import { useMessage,NInput,NButton, NTag,NSelect,NPopover } from 'naive-ui';
 import { computed, onMounted, ref, watch } from 'vue';
 import { SvgIcon } from '@/components/common';
-import { t } from '@/locales';
+import { t } from '@/locales'; 
+import { RunwayTask } from '@/api/runwayStore';
 
 const fsRef= ref() ;
 const runway= ref<{image_prompt?:string,seed:number,text_prompt:string}>({image_prompt:'',seed:1675247627,text_prompt:''});
 const st= ref({isDo:false,uploading:false, version:'gen2',time:5});
 const ms = useMessage();
+const exRunway= ref<RunwayTask>()
 async function  selectFile(input:any){
     mlog("selectFile", input.target.files[0])
     const file = input.target.files[0]  
@@ -94,9 +96,31 @@ const generate= async ()=>{
                     "assetGroupName": "Generative Video",
                     "init_image": runway.value.image_prompt,
                     "resolution": '720p'// runway.value.image_prompt,
+                    ,"extended_from_task_id":(exRunway.value&&exRunway.value.id)?exRunway.value.id:undefined
+                    ,"init_video": ( exRunway.value && exRunway.value.artifacts && exRunway.value.artifacts[0].url)?exRunway.value.artifacts[0].url:undefined
                 },
             //    "asTeamId": 17511575
         }
+        let gen3_trubo=    {
+                "taskType": "gen3a_turbo",
+                "internal": false,
+                "options": {
+                    "name": `Gen-3 Alpha Turbo ${seed}`,
+                    "seconds":st.value.time,
+                    "text_prompt": runway.value.text_prompt ,
+                    "seed": seed,
+                    "exploreMode": false,
+                    "watermark": false,
+                    "enhance_prompt": true,
+                    "init_image":  runway.value.image_prompt,
+                    "resolution": "720p",
+                    "image_as_end_frame": false,
+                    "assetGroupName": "Generative Video"
+                   ,"extended_from_task_id":(exRunway.value&&exRunway.value.id)?exRunway.value.id:undefined
+                    ,"init_video": ( exRunway.value && exRunway.value.artifacts && exRunway.value.artifacts[0].url)?exRunway.value.artifacts[0].url:undefined
+                }
+}
+  
 
         if( obj.options.gen2Options.image_prompt==''){
             delete obj.options.gen2Options.image_prompt;
@@ -104,12 +128,31 @@ const generate= async ()=>{
         }
         if( gen3.options.init_image=='' ){
             delete gen3.options.init_image;
-            //delete gen3.options.resolution;
+            delete gen3_trubo.options.init_image;
+        }
+        if( !gen3.options.init_video  ){
+            delete gen3.options.init_video;
+            delete gen3_trubo.options.init_video;
+        }
+        if( !gen3.options.extended_from_task_id  ){
+            delete gen3.options.extended_from_task_id;
+            delete gen3_trubo.options.extended_from_task_id;
         }
         
         gen3.options.exploreMode= st.value.version=='europa'
-
-        const d=  await runwayFetch('/tasks', st.value.version=='gen2'?obj: gen3 ) 
+        let sobj:any = gen3;
+        if(  st.value.version=='gen2' ){
+            sobj= obj
+        }
+        if(  st.value.version=='gen3a_turbo' ){
+            sobj= gen3_trubo
+            if(gen3_trubo.options.init_image=='') {
+                ms.error( t('video.gen3a_turbo_img') )
+                return 
+            }
+        }
+       // const d=  await runwayFetch('/tasks', st.value.version=='gen2'?obj: gen3 ) 
+        const d=  await runwayFetch('/tasks',  sobj ) 
         mlog("runwayGen2",d) 
         d.task && d.task.id&& runwayFeed(d.task.id)
     }catch(e:any){
@@ -123,6 +166,7 @@ const mvOption= [
 {label: t('video.rwgen2'),value: 'gen2'}
 ,{label:t('video.rwgen3'),value: 'europa'}
 ,{label:t('video.rwgen3fast'),value: 'europa-fast'}
+,{label:t('video.rwgen3turbo'),value: 'gen3a_turbo'}
  ]
  const timeOption= [
 {label: 'Duration: 5s',value: 5}
@@ -134,6 +178,7 @@ const mvOption= [
 const clearInput=()=>{
     runway.value.image_prompt ='' 
     runway.value.text_prompt =''
+    exRunway.value= undefined
 }
 watch(()=>st.value.version,(n:string)=>{
     gptServerStore.setMyData({RRUNWAY_VERSION:n})
@@ -141,6 +186,13 @@ watch(()=>st.value.version,(n:string)=>{
 onMounted(() => {
     homeStore.setMyData({ms:ms})
     st.value.version= gptServerStore.myData.RRUNWAY_VERSION?gptServerStore.myData.RRUNWAY_VERSION: 'gen2'
+});
+
+watch(()=>homeStore.myData.act, (n)=>{
+     if(n=='runway.extend'){
+       mlog("runway.extend", homeStore.myData.actData )
+       exRunway.value = homeStore.myData.actData as RunwayTask
+     }
 });
 </script>
 <template>
@@ -153,9 +205,45 @@ onMounted(() => {
                 :placeholder="$t('video.descpls')"  type="textarea"  size="small"   
                 :autosize="{ minRows: 3, maxRows: 12  }"  />
     </div>
+
+    <div v-if="exRunway" class="pt-1">
+        <div class="flex justify-between items-center">
+            <div  >
+                <n-popover trigger="hover">
+                    <template #trigger>
+                    <div class="line-clamp-1">
+                    {{ $t('video.extend') }}: 
+                     <template   v-if="exRunway.options.text_prompt">{{ exRunway.options.text_prompt }}</template>
+                     <template v-else  >{{ exRunway.options.gen2Options?.text_prompt?exRunway.options.gen2Options.text_prompt: exRunway.name }}</template>
+                    </div>
+                    </template>
+                    <div class=" max-w-[300px]">{{exRunway.id}}</div>
+                    
+                    <div v-if="exRunway.taskType=='gen3a'" >Version: Gen-3</div>
+                    <div v-if="exRunway.taskType=='gen3a_turbo'" >Version: Gen-3-turbo</div>
+                    <div v-if="exRunway.taskType=='gen2'" >Version: Gen-2</div>
+                    <div v-if="exRunway.createdAt" >createdAt: {{ new Date( exRunway.createdAt).toLocaleString() }}</div>
+                    <div class=" max-w-[300px]" v-if="exRunway.options.text_prompt">{{ exRunway.options.text_prompt }}</div>
+                    <div class=" max-w-[300px]">{{ exRunway.options.gen2Options?.text_prompt?exRunway.options.gen2Options.text_prompt: exRunway.name }}</div>
+                
+                </n-popover>
+            </div>
+        </div>
+        <div class="relative flex items-center justify-center bg-white bg-opacity-10 rounded-[5px] overflow-hidden aspect-[16/8.85] ">
+            <video   loop  playsinline  controls v-if="exRunway.artifacts && exRunway.artifacts[0].url"
+                referrerpolicy="no-referrer" :poster="exRunway.artifacts[0].previewUrls[0]" 
+                class="w-full h-full object-cover"  >
+                <source  :src="exRunway.artifacts[0].url" referrerpolicy="no-referrer" type="video/mp4"  >
+            </video>   
+        </div>
+            
+    </div>
+
     <div  class="pt-1" v-if="st.version!='gen2'" >
         <n-select v-model:value="st.time" :options="timeOption" size="small" />
     </div>
+
+
 
     <div class="pt-1">
         <div class="flex justify-between  items-end">
@@ -178,7 +266,7 @@ onMounted(() => {
             </div>
             <div class="text-right">
                  <div class="pb-1 text-right">
-                    <NTag v-if="runway.text_prompt!='' || runway.image_prompt!=''" type="success" size="small" round  ><span class="cursor-pointer" @click="clearInput()" >{{$t('video.clear')}}</span></NTag>
+                    <NTag v-if="runway.text_prompt!='' || runway.image_prompt!='' || exRunway" type="success" size="small" round  ><span class="cursor-pointer" @click="clearInput()" >{{$t('video.clear')}}</span></NTag>
                 </div>
                 <NButton  :loading="st.isDo" type="primary" :disabled="!canPost" @click="generate()"><SvgIcon icon="ri:video-add-line"  /> {{$t('video.generate')}}</NButton> 
             </div>
