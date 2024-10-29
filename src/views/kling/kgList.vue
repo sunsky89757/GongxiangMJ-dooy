@@ -4,7 +4,7 @@ import 'vue-waterfall-plugin-next/dist/style.css'
 
 import { KlingTask, klingStore } from '@/api/klingStore';
 import { nextTick, ref, watch } from 'vue';
-import {NEmpty ,NButton,NPopover, NButtonGroup,NSpin, NImage} from "naive-ui"
+import {NEmpty ,NButton,NPopover, NButtonGroup,NSpin, NImage,NPopconfirm,useMessage} from "naive-ui"
 import { ViewCard } from 'vue-waterfall-plugin-next/dist/types/types/waterfall';
 import { useBasicLayout } from '@/hooks/useBasicLayout';
 import { homeStore } from '@/store';
@@ -12,12 +12,14 @@ import { klingFeed } from '@/api/kling';
 import { mlog } from '@/api';
 import { SvgIcon } from '@/components/common';
 import { t } from '@/locales';
+import KgImage from './kgImage.vue';
 
 const list= ref<KlingTask[]>([]);
 const list2= ref<ViewCard[]>([]);
  
 const st =ref({show:true ,showImg:'' ,isLoad:false,pIndex:-1,isStart:true });
 const csuno= new klingStore()
+const ms= useMessage()
 const initLoad=()=>{
     let arr = csuno.getObjs();
     list.value= arr.reverse()
@@ -62,6 +64,14 @@ const goShow=( item:any)=>{
     //console.log('goShow', item);
     nextTick(() => showImg.value?.click());
 }
+const goShow2=( item:any)=>{
+    //console.log('goShow', isMobile );
+    if( isMobile.value)   return ; 
+    st.value.show= true;
+    st.value.showImg= (item.base64?item.base64: item.src) as string ;
+    //console.log('goShow', item);
+    nextTick(() => showImg.value?.click());
+}
 
 initLoad();
 watch(()=>homeStore.myData.act, (n)=>{
@@ -74,7 +84,14 @@ const getFeed=( item:any)=>{
     mlog('item', item )
     klingFeed( item.task.data.task_id, item.task.cat, item.task.prompt )
 }
-//
+
+const deleteGo=(item:any)=>{
+    mlog('deleteGo',item )
+    if( csuno.delete( item.id)){ 
+        ms.success( t('common.deleteSuccess'))
+        initLoad()
+    }
+}
 </script>
 <template>
 <div v-if="list.length>0" class="p-4">
@@ -99,7 +116,8 @@ const getFeed=( item:any)=>{
                         <SvgIcon icon="ri:play-fill"  />
                     </a>
                 </div>
-                <LazyImg :url="item.src"  @success="item.isLoad=1"  @click="goShow(item )" v-else-if="item.src" />
+                <!-- <LazyImg :url="item.src"  @success="item.isLoad=1"  @click="goShow(item )" v-else-if="item.src" /> -->
+                <KgImage :item="item"  @kg-success="item.isLoad=1"  @kg-click="goShow2 " v-else-if="item.src" />
                 <div v-else class="w-[200px] h-[200px]"></div>
     
                
@@ -112,9 +130,15 @@ const getFeed=( item:any)=>{
             </template>
 
              <section v-if="item.task.prompt" class="absolute w-full bottom-0   backdrop-blur-sm text-white/70  " :class="item.src?['invisible', 'group-hover/item:visible']:[]">
-                    <div class="p-3">
+                    <div class="p-3  flex justify-between items-baseline"> 
                         <div class="line-clamp-2 text-[13px]"> 
-                        <template v-if="item.task.prompt">{{ item.task.prompt }}</template>
+                            <template v-if="item.task.prompt">{{ item.task.prompt }}</template>
+                        </div>
+                        <div>
+                            <n-popconfirm @positive-click="()=>deleteGo(item)" placement="bottom">
+                                <template #trigger> <SvgIcon icon="mdi:delete"  /></template>
+                                {{ $t('mj.confirmDelete') }}
+                            </n-popconfirm> 
                         </div>
                     </div>
                 </section>

@@ -112,6 +112,8 @@ export interface gptServerType{
     IDEO_KEY:string
     KLING_SERVER:string
     KLING_KEY:string
+    PIKA_SERVER:string
+    PIKA_KEY:string
     IS_SET_SYNC?:boolean
     GPTS_GX?:boolean
     IS_LUMA_PRO?:boolean
@@ -119,6 +121,9 @@ export interface gptServerType{
     DRAW_TYPE?:string
     IS_VIGGLE_PRO?:boolean
     TAB_VIDEO?:string
+    TTS_VOICE?:string
+    REALTIME_SYSMSG?:string
+    REALTIME_IS_WHISPER?:boolean 
 
 }
 
@@ -143,7 +148,10 @@ let v:gptServerType={
         IDEO_SERVER:'',
         IDEO_KEY:'',
         KLING_SERVER:'',
-        KLING_KEY:''
+        KLING_KEY:'',
+        PIKA_SERVER:'',
+        PIKA_KEY:'',
+        TTS_VOICE:'alloy'
     }
     return v ;
 }

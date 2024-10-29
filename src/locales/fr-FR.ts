@@ -214,6 +214,28 @@ export default {
         seed: 'Numéro de graine 1~2147483647',
         klingInfo: 'Description : <li>1. Haute qualité coûte 3,5 fois le prix</li> <li>2. 10 secondes coûtent 2 fois le prix</li> <li>3. La dernière image doit avoir une image de référence pour prendre effet</li>'
 
+        ,"camera_type": "Objectif",
+        "cnull": "Correspondance intelligente",
+        "down_back": "Descendre et zoomer",
+        "forward_up": "Avancer et monter",
+        "right_turn_forward": "Tourner à droite et avancer",
+        "left_turn_forward": "Tourner à gauche et avancer"
+        ,kling:'Kling'
+        ,rttab: 'Voix',
+        rtinfo: 'Service de conversation vocale en temps réel (realtime)',
+        rtsetting: 'Veuillez configurer le serveur. Actuellement, Realtime ne prend en charge que les services à distance ; pour les services locaux, veuillez contacter l\'auteur.',
+        rjcloded: 'La connexion a été déconnectée',
+        checkkey: 'Veuillez vérifier si la clé API est correcte',
+        rtsuccess: 'Connexion normale, maintien de l\'appel',
+        rtservererror: 'Erreur de connexion au serveur WebSocket !',
+        rtservererror2: 'Enregistrement non pris en charge, cela peut être dû à un problème de matériel !',
+        rtconecting: 'Connexion au serveur en cours',
+        "confirmDelete": "Êtes-vous sûr de vouloir supprimer ?",
+        "pikaabout": "À propos de Pika",
+        "pikaserver": "Adresse API Pika",
+        "pikakeyPlaceholder": "Clé API Pika (facultatif)",
+        "createFail": "Échec de la création",
+        "selecteff": "Effet de référence"
     },
     "mjset": {
         "server": "Serveur",

@@ -213,6 +213,29 @@ export default {
         needImg: 'Etki etmesi için lütfen bir referans resmi yükleyin!',
         seed: 'Tohum numarası 1~2147483647',
         klingInfo: 'Açıklama: <li>1. Yüksek kalite fiyatın 3.5 katıdır</li> <li>2. 10 saniye fiyatın 2 katıdır</li> <li>3. Son kare etkili olması için bir referans resmine sahip olmalıdır</li>'
+    
+        ,"camera_type": "Lens",
+        "cnull": "Akıllı eşleştirme",
+        "down_back": "Aşağı ve geri git",
+        "forward_up": "İleri it ve yukarı kaldır",
+        "right_turn_forward": "Sağa dön ve ileri git",
+        "left_turn_forward": "Sola dön ve ileri git"
+        ,kling:'Kling',
+        rttab: 'Ses',
+        rtinfo: 'Gerçek zamanlı sesli görüşme hizmeti (realtime)',
+        rtsetting: 'Lütfen sunucuyu ayarlayın. Şu anda Realtime yalnızca uzaktan hizmetleri desteklemektedir; yerel hizmetler için lütfen yazarla iletişime geçin.',
+        rjcloded: 'Bağlantı kesildi',
+        checkkey: 'API anahtarının doğru olup olmadığını kontrol edin',
+        rtsuccess: 'Bağlantı normal, görüşmeyi sürdürüyor',
+        rtservererror: 'WebSocket sunucu bağlantı hatası!',
+        rtservererror2: 'Kaydetme desteklenmiyor, bu cihaz kaynaklı bir sorun olabilir!',
+        rtconecting: 'Sunucuya bağlanılıyor',
+        "confirmDelete": "Silmek istediğinize emin misiniz?",
+        "pikaabout": "Pika Hakkında",
+        "pikaserver": "Pika API Adresi",
+        "pikakeyPlaceholder": "Pika API Anahtarı (isteğe bağlı)",
+        "createFail": "Oluşturma başarısız",
+        "selecteff": "Referans Etkisi"
     },
     "mjset": {
         "server": "Sunucu",

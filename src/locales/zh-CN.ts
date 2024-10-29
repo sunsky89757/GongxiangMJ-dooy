@@ -318,6 +318,31 @@ export default {
     ,seed:'种子数字 1~2147483647'
     ,klingInfo:'说明： <li>1. 高表现是3.5倍的价格</li>  <li>2. 10s是2倍的价格</li> <li>3. 尾帧必须有参考图片才生效</li>'
 
+    ,camera_type:'镜头'
+    ,cnull:'智能匹配'
+    ,down_back: '下移拉远'
+    ,forward_up: '推进上移'
+    ,right_turn_forward: '右旋推进'
+    ,left_turn_forward: '左旋推进'
+
+    ,kling:'可灵'
+
+    ,rttab:'语音'
+    ,rtinfo:'实时语音对话服务(realtime)'
+    ,rtsetting:'请设置服务端，目前Realtime 仅支持远程服务；需本地服务请联系作者'
+    ,rjcloded:'连接已断开'
+    ,checkkey:'请检查 api key 是否正确'
+    ,rtsuccess:'连接正常保持通话'
+    ,rtservererror:'websocket 连接服务器错误！'
+    ,rtservererror2:'不支持录音，可能是设备原因！'
+    ,rtconecting:'正在连接服务器'
+
+    ,confirmDelete:'确认要删除？'
+    ,pikaabout:'Pika 相关'
+    ,pikaserver:'Pika 接口地址'
+    ,pikakeyPlaceholder:'Pika 的API Key 可不填'
+    ,createFail:'生成失败'
+    ,selecteff:'参考效果'
 
   },
 
@@ -472,7 +497,7 @@ export default {
     runwayserver:'Runway 接口地址',
     setOpenKeyPlaceholder2:'Runway API 的key, 可不填',
     endImg:'尾帧图',
-    runwayinfo:'说明：<ul><li>1. Runway 图片与视频都有有效期</li>  <li>2. 请在生成视频后30分钟内将mp4保存到本地</li>  <li>3. 过期重新获取，可能存在账号下线而获取失败</li><li>4. Gen3A Turbo 必须带图</li></ul>',
+    runwayinfo:'说明：<ul><li>1. Runway 图片与视频都有有效期</li>  <li>2. 请在生成视频后30分钟内将mp4保存到本地</li>  <li>3. 过期重新获取，可能存在账号下线而获取失败</li><li>4. Gen3A Turbo 必须带图或者视频</li><li>5. 参考可以是图或者视频mp4 </li></ul>',
     nosup:'暂不支持',
     rwgen2:'版本: Gen-2, 价格实惠',
     rwgen3:'版本: Gen-3 Alpha',

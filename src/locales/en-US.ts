@@ -215,6 +215,29 @@ export default {
   seed: 'Seed number 1~2147483647',
   klingInfo: 'Description: <li>1. High Quality is 3.5 times the price</li> <li>2. 10s is 2 times the price</li> <li>3. The last frame must have a reference image to take effect</li>'
   
+  ,"camera_type": "Lens",
+  "cnull": "Smart Matching",
+  "down_back": "Move Down and Zoom Out",
+  "forward_up": "Push Forward and Move Up",
+  "right_turn_forward": "Turn Right and Push Forward",
+  "left_turn_forward": "Turn Left and Push Forward"
+  ,kling:'Kling'
+
+  ,rttab: 'RealTime',
+  rtinfo: 'Realtime voice conversation service',
+  rtsetting: 'Please set the server. Currently, Realtime only supports remote services; for local services, please contact the author.',
+  rjcloded: 'Connection has been disconnected',
+  checkkey: 'Please check if the API key is correct',
+  rtsuccess: 'Connection is normal, maintaining the call',
+  rtservererror: 'WebSocket connection server error!',
+  rtservererror2: 'Recording is not supported, it may be due to device reasons!',
+  rtconecting: 'Connecting to the server'
+  ,confirmDelete:'Are you sure?',
+  pikaabout: 'About Pika',
+  pikaserver: 'Pika API Address',
+  pikakeyPlaceholder: 'Pika API Key (optional)',
+  createFail: 'Creation failed',
+  selecteff: 'Reference Effect'
   },
   "mjset": {
     "server": "Server",
